@@ -8,14 +8,15 @@
 package main
 
 import (
-	apiHttp "api-plantilla/infrastructure/api/http"
-	"api-plantilla/infrastructure/persistence/db"
-	"api-plantilla/infrastructure/router"
-	"api-plantilla/shared"
+	apiHttp "api-cif/infrastructure/api/http"
+	"api-cif/infrastructure/persistence/db"
+	"api-cif/infrastructure/router"
+	"api-cif/shared"
 
-	logFactory "api-plantilla/shared/pattern/log"
-	logAdapter "api-plantilla/shared/pattern/log/adapter"
 	"os"
+
+	logFactory "api-cif/shared/pattern/log"
+	logAdapter "api-cif/shared/pattern/log/adapter"
 
 	"github.com/joho/godotenv"
 	"github.com/rs/zerolog"
@@ -26,6 +27,7 @@ const PLTL_CONFIGURACION_NOMBRE = "CONFIGURACION"
 const PLTL_MSM_INICIO = "Iniciando Servicio...!"
 const PLTL_MSM_INICIADO = "Servicio iniciado..."
 const PLTL_MSM_ERROR_INICIO = "Deteniendo el servicio por no existir la configuración requerida..."
+const PLTL_MSM_EXITO_CONEXION_BD = "Conectado a la base de datos"
 
 func main() {
 
@@ -65,6 +67,8 @@ func main() {
 
 	if objErrorCnxSql != nil {
 		logFactory.LogMensaje(objLogger, objErrorCnxSql.Error(), logFactory.Error)
+	} else {
+		logFactory.LogMensaje(objLogger, PLTL_MSM_EXITO_CONEXION_BD, logFactory.Info)
 	}
 
 	// Cierra la conexión al finalizar la ejecución
@@ -72,10 +76,8 @@ func main() {
 
 	// Establece las rutas a exponer por el API
 	objAppRouter := router.NewAppRouter()
-
 	// Exponer las funcionalidades segun indicadas en las rutas
-	objAppRouter.AgregarRutasPersona(apiHttp.NewPersonaHandler(objDbSql, objLogger, objConfig))
-	objAppRouter.AgregarRutasPrueba(apiHttp.NewPruebaHandler(objLogger, objConfig))
+	objAppRouter.AgregarRutasCliente(apiHttp.NewClienteHandler(objDbSql, objLogger, objConfig))
 
 	// Agrega Swagger
 	objAppRouter.AgregarSwagger(objConfig)

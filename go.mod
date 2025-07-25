@@ -1,4 +1,4 @@
-module api-plantilla
+module api-cif
 
 go 1.24.4
 

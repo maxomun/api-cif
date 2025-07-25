@@ -5,7 +5,7 @@
     "ApiVersion": "1.0.1",
     "ApiSwagger": "/swagger/*any",
     "ApiDescripcion": "API Rest para la capa CORE de la arquitectura corporativa",    
-    "BdSql": "sqlserver://[SERVIDOR]?database=[BASEDEDATOS]&user id=[USUARIO]&password=[CLAVE]",
+    "BdSql": "sqlserver://usr_api_cif:Mi6tDGeHGoSXvBQzjVYz@cif-dev?database=cif-dev-v2",
     "BdSqlMaxCnxAbierta": 20, 
     "BdSqlMaxCnxInactiva": 10,
     "BdSqlMaxTiempoVida": 30,

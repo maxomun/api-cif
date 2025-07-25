@@ -8,12 +8,12 @@
 package router
 
 import (
-	apiHttp "api-plantilla/infrastructure/api/http"
-	"api-plantilla/shared"
+	apiHttp "api-cif/infrastructure/api/http"
+	"api-cif/shared"
 
 	"net/http"
 
-	docInfo "api-plantilla/docs"
+	docInfo "api-cif/docs"
 
 	"github.com/gin-gonic/gin"
 	swaggerFile "github.com/swaggo/files"
@@ -29,18 +29,9 @@ func NewAppRouter() *AppRouter {
 	return &AppRouter{objRouter: gin.Default()}
 }
 
-func (objRuta *AppRouter) AgregarRutasPersona(objCntr *apiHttp.PersonaHandler) {
+func (objRuta *AppRouter) AgregarRutasCliente(objCntr *apiHttp.ClienteHandler) {
 
-	objRuta.objRouter.GET("/personas/:id_persona", objCntr.BuscarPorId)
-	objRuta.objRouter.POST("/personas", objCntr.Crear)
-	objRuta.objRouter.PUT("/personas", objCntr.Actualizar)
-	objRuta.objRouter.GET("/personas", objCntr.Listar)
-}
-
-func (objRuta *AppRouter) AgregarRutasPrueba(objCntr *apiHttp.PruebaHandler) {
-
-	objRuta.objRouter.GET("/pruebas/:id_persona", objCntr.BuscarPorId)
-	objRuta.objRouter.PUT("/pruebas", objCntr.Actualizar)
+	objRuta.objRouter.GET("/clientes/:id", objCntr.BuscarPorId)
 }
 
 func (objRuta *AppRouter) AgregarSwagger(config shared.Configuracion) {

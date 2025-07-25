@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	logFactory "api-plantilla/shared/pattern/log"
+	logFactory "api-cif/shared/pattern/log"
 
 	servicebus "github.com/Azure/azure-service-bus-go"
 )

@@ -10,11 +10,12 @@
 package db
 
 import (
-	"api-plantilla/shared"
 	"database/sql"
 	"errors"
 	"sync"
 	"time"
+
+	"api-cif/shared"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/volatiletech/sqlboiler/v4/boil"
