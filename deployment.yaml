@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-persona-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-persona-deployment
+  template:
+    metadata:
+      labels:
+        app: api-persona-deployment
+    spec:
+      containers:
+      - name: api-persona-deployment
+        image: acrarqpoc.azurecr.io/api-persona:04062025-v1
+        env:
+        - name: CONFIGURACION
+          valueFrom:
+            configMapKeyRef:
+              name: cm-api-prueba
+              key: CONFIGURACION
+        - name: DB-CLAVE
+          valueFrom:
+            secretKeyRef:
+              name: db-clave-api-prueba
+              key: db-clave
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-persona-service
+  labels:
+    app: api-persona-deployment
+spec:
+  type: ClusterIP
+  selector:
+    app: api-persona-deployment
+  ports:
+  - protocol: TCP
+    port: 80          # Puerto público
+    targetPort: 8080  # Puerto en el contenedor

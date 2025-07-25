@@ -1,0 +1,15 @@
+{
+    "UrlServicioBus": "<string conexion azure service bus>",
+    "SbTopico": "sb-log-evento",
+    "ApiNombre": "api plantilla",
+    "ApiVersion": "1.0.1",
+    "ApiSwagger": "/swagger/*any",
+    "ApiDescripcion": "API Rest para la capa CORE de la arquitectura corporativa",    
+    "BdSql": "sqlserver://[SERVIDOR]?database=[BASEDEDATOS]&user id=[USUARIO]&password=[CLAVE]",
+    "BdSqlMaxCnxAbierta": 20, 
+    "BdSqlMaxCnxInactiva": 10,
+    "BdSqlMaxTiempoVida": 30,
+    "BdNoSql": "mongodb+srv://[USUARIO]:[CLAVE]@[SERVIDOR]/?retryWrites=true&w=majority&appName=[CLUSTER]",
+    "PuertoApi": "8080",
+    "UrlApiLogger": "http://logger.bancotanner.cl"
+}

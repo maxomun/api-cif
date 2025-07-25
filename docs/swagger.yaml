@@ -1,0 +1,268 @@
+definitions:
+  persona.PersonaDto:
+    properties:
+      apMaterno:
+        type: string
+      apPaterno:
+        type: string
+      edad:
+        type: integer
+      id:
+        type: integer
+      impuesto:
+        type: number
+      mail:
+        type: string
+      nombre:
+        type: string
+      numCelular:
+        type: integer
+      renta:
+        type: integer
+    type: object
+  persona.PersonaRequest:
+    properties:
+      apMaterno:
+        type: string
+      apPaterno:
+        type: string
+      edad:
+        type: integer
+      impuesto:
+        type: number
+      mail:
+        type: string
+      nombre:
+        type: string
+      numCelular:
+        type: integer
+      renta:
+        type: integer
+    type: object
+  shared.EstadoHttpDto:
+    properties:
+      codigo:
+        type: integer
+      detalle:
+        type: string
+      mensaje:
+        type: string
+    type: object
+  shared.MensajeDto-bool:
+    properties:
+      estado:
+        $ref: '#/definitions/shared.EstadoHttpDto'
+      objeto:
+        type: boolean
+    type: object
+  shared.MensajeDto-persona_PersonaDto:
+    properties:
+      estado:
+        $ref: '#/definitions/shared.EstadoHttpDto'
+      objeto:
+        $ref: '#/definitions/persona.PersonaDto'
+    type: object
+  shared.MensajeDto-string:
+    properties:
+      estado:
+        $ref: '#/definitions/shared.EstadoHttpDto'
+      objeto:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /personas:
+    get:
+      consumes:
+      - application/json
+      description: Listado de personas vigentes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-persona_PersonaDto'
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+      summary: Listado de personas
+      tags:
+      - PersonaHandler
+    post:
+      consumes:
+      - application/json
+      description: Crea una persona basado en los datos proporcionados
+      parameters:
+      - description: Información de la persona
+        in: body
+        name: persona
+        required: true
+        schema:
+          $ref: '#/definitions/persona.PersonaRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-persona_PersonaDto'
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+      summary: Crea nueva persona
+      tags:
+      - PersonaHandler
+    put:
+      consumes:
+      - application/json
+      description: Actualiza una persona basado en los datos proporcionados
+      parameters:
+      - description: Información de la persona
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/persona.PersonaDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-bool'
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+      summary: Actualiza persona
+      tags:
+      - PersonaHandler
+  /personas/{id_persona}:
+    get:
+      consumes:
+      - application/json
+      description: Devuelve una persona
+      parameters:
+      - description: id_persona
+        in: path
+        name: id_persona
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-persona_PersonaDto'
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+      summary: buscar persona por identificador
+      tags:
+      - PersonaHandler
+  /pruebas:
+    put:
+      consumes:
+      - application/json
+      description: Actualiza una persona basado en los datos proporcionados
+      parameters:
+      - description: Información de la persona
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/persona.PersonaDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-persona_PersonaDto'
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+      summary: Actualiza persona
+      tags:
+      - PruebaHandler
+  /pruebas/buscar-por-criterio/{id_persona}:
+    get:
+      consumes:
+      - application/json
+      description: Devuelve una persona
+      parameters:
+      - description: id_persona
+        in: path
+        name: id_persona
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-persona_PersonaDto'
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/shared.MensajeDto-string'
+      summary: buscar persona por identificador
+      tags:
+      - PruebaHandler
+swagger: "2.0"
